@@ -23,7 +23,7 @@ class Snippets(models.Model):
     linenos = models.BooleanField(default=False)
     style = models.CharField(choices=STYLE_CHOICES, default='friendly', max_length=100)
     language = models.CharField(choices=LANGUAGE_CHOICES, default='python', max_length=100)
-    owner = models.ForeignKey(User, related_name='snippets', on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, related_name='snippets', on_delete=models.CASCADE, null=True)
     highlighted = models.TextField(blank=True)
 
     def save(self, *args, **kwargs):

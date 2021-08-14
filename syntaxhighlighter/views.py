@@ -1,5 +1,3 @@
-from django.contrib.auth import models
-from django.shortcuts import render
 from django.contrib.auth.models import User
 
 
@@ -13,13 +11,6 @@ from rest_framework.decorators import api_view, action, renderer_classes
 from .serializers import HighlightedTextSerializer, UserSerializer
 from .models import Snippets
 from .permissions import IsOwnerOrReadOnly
-
-@api_view(['GET'])
-def api_root(request, format=None):
-    return Response({
-        "users": reverse('user-list', request=request, format=format),
-        "snippets": reverse('snippets-list', request=request, format=format)
-    })
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """

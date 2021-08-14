@@ -1,8 +1,12 @@
-from django.urls import path
-from .views import SnippetList, SnippetCreateRetrieve, SnippetHighlight
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from syntaxhighlighter import views
+
+router = DefaultRouter()
+router.register(r'snippets', views.SnippetsViewSet)
+router.register(r'users', views.UserViewSet)
+
+
 urlpatterns = [
-    path('snippets/', SnippetList.as_view(), name='list-snippets'),
-    path('snippets/retrieve/<int:pk>/', SnippetCreateRetrieve.as_view(), name='get-snippets'),
-    path('snippets/create/', SnippetCreateRetrieve.as_view(), name='create-snippets'),
-    path('snippets/highlight/', SnippetHighlight.as_view(), name='get-snippets-highlight')
+    path('', include(router.urls)),
 ]

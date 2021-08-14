@@ -6,7 +6,8 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
     """
 
     def has_object_permission(self, request, view, obj):
-        # Allow all read permissions
+        # Allow all READ requests; block WRITE request if it violates 
+        # ownership condition
         if request.method in permissions.SAFE_METHODS:
             return True
         
